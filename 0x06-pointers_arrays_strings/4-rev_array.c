@@ -3,21 +3,20 @@
 #include <stdio.h>
 
 /**
- * reverse_array - check the code for Holberton School students.
- * @a: is a pointer type char
- * @n: is a pointer type char
- * Return: Always 0.
- *
+ * reverse_array - reverses an array of integers
+ * @a: array to be reversed
+ * @n: number of elements in the array
  */
 void reverse_array(int *a, int n)
 {
-int result[500];
-int i;
-n--;
+	int i, j, tmp;
 
-for (i = 0; i <= n; i++)
-result[i] = a[i];
+	j = n - 1;
 
-for (i = 0; i <= n; i++)
-a[i] = result[n - i];
+	for (i = 0; i < n / 2; i++)
+	{
+		tmp = a[i];
+		a[i] = a[j];
+		a[j--] = tmp;
+	}
 }
