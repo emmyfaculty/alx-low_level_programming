@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <stdio.h>
 
 /**
   * print_list - fills memory with a constant byte
