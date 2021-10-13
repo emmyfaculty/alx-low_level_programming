@@ -1,20 +1,24 @@
-#include <stdlib.h>
 #include "lists.h"
 
 /**
- * free_list - frees a linked list
- * @head: list_t list to be freed
- */
+  * free_list - fills memory with a constant byte
+  * @head: is the owner of the dog
+  * Return: a number
+  */
 void free_list(list_t *head)
 {
-	list_t *temp;
+	list_t *savepoin;
 
-	while (head)
+	if (head != NULL)
 	{
-		temp = head->next;
+		while (head->next != NULL)
+		{
+			savepoin = head->next;
+			free(head->str);
+			free(head);
+			head = savepoin;
+		}
 		free(head->str);
 		free(head);
-		head = temp;
 	}
 }
-
