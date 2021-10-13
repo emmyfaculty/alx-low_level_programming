@@ -1,43 +1,41 @@
+#include <stdlib.h>
+#include <string.h>
 #include "lists.h"
 
 /**
-  * add_node_end - fills memory with a constant byte
-  * @head: is the owner of the dog
-  * @str: is a string
-  * Return: a address
-  */
+ * add_node_end - adds a new node at the end of a linked list
+ * @head: double pointer to the list_t list
+ * @str: string to put in the new node
+ *
+ * Return: address of the new element, or NULL if it failed
+ */
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *new, *headcopy;
-	size_t n;
+	list_t *new;
+	list_t *temp = *head;
+	unsigned int len = 0;
 
-	headcopy = *head;
+	while (str[len])
+		len++;
 
 	new = malloc(sizeof(list_t));
-	if (new == NULL)
+	if (!new)
 		return (NULL);
+
 	new->str = strdup(str);
-	if (new->str == NULL)
-	{
-		free(new);
-		return (NULL);
-	}
-	for (n = 0; new->str[n] != '\0'; n++)
-		;
-	new->len = n;
+	new->len = len;
+	new->next = NULL;
+
 	if (*head == NULL)
 	{
-		new->next = *head;
 		*head = new;
-	}
-	else
-	{
-		while (headcopy->next != NULL)
-			headcopy = headcopy->next;
-		new->next = (headcopy)->next;
-		(headcopy)->next = new;
+		return (new);
 	}
 
-	return (*head);
+	while (temp->next)
+		temp = temp->next;
+
+	temp->next = new;
+
+	return (new);
 }
-
